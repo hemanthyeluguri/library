@@ -1,0 +1,84 @@
+<div class="d-flex" style="margin-top: 60px;">
+    <div class="d-flex flex-column p-3 bg-light" style="width: 250px">
+        <!-- MAIN -->
+        <h6 class="text-muted text-uppercase">Main</h6>
+        <ul class="nav nav-pills flex-column mb-3">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+                    <i class="bi bi-grid-fill me-2"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/books" routerLinkActive="active">
+                    <i class="bi bi-book me-2"></i>
+                    Books
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/members" routerLinkActive="active">
+                    <i class="bi bi-people me-2"></i>
+                    Members
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/loans" routerLinkActive="active">
+                    <i class="bi bi-clipboard-check me-2"></i>
+                    Loans
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/reservations" routerLinkActive="active">
+                    <i class="bi bi-calendar-event me-2"></i>
+                    Reservations
+                </a>
+            </li>
+        </ul>
+
+        <!-- CATEGORIES -->
+        <h6 class="text-muted text-uppercase mt-2">Categories</h6>
+        <ul class="nav flex-column mb-3 px-3">
+            <li class="nav-item d-flex align-items-center mb-1">
+                <span class="bg-primary rounded-circle me-2" style="width: 10px; height: 10px;"></span>
+                <a routerLink="/books/Fiction" routerLinkActive="active" class="nav-link">Fiction</a>
+            </li>
+            <li class="nav-item d-flex align-items-center mb-1">
+                <span class="bg-success rounded-circle me-2" style="width: 10px; height: 10px;"></span>
+                <a routerLink="/books/Non-Fiction" routerLinkActive="active" class="nav-link">Non-Fiction</a>
+            </li>
+            <li class="nav-item d-flex align-items-center mb-1">
+                <span class="bg-warning rounded-circle me-2" style="width: 10px; height: 10px;"></span>
+                <a routerLink="/books/Academic" routerLinkActive="active" class="nav-link">Academic</a>
+            </li>
+            <li class="nav-item d-flex align-items-center mb-1">
+                <span class="bg-info rounded-circle me-2" style="width: 10px; height: 10px;"></span>
+                <a routerLink="/books/Children" routerLinkActive="active" class="nav-link">Children</a>
+            </li>
+        </ul>
+        <!-- SYSTEM -->
+        <h6 class="text-muted text-uppercase mt-2">System</h6>
+        <ul class="nav flex-column pb-2">
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/settings" routerLinkActive="active">
+                    <i class="bi bi-gear me-2"></i>
+                    Settings
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/reports" routerLinkActive="active">
+                    <i class="bi bi-file-earmark-text me-2"></i>
+                    Reports
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/activityLog" routerLinkActive="active">
+                    <i class="bi bi-clock-history me-2"></i>
+                    Activity Log
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="flex-grow-1 p-4">
+        <router-outlet></router-outlet>
+    </div>
+</div>

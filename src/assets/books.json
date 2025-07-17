@@ -1,0 +1,802 @@
+[
+  {
+    "id": 1,
+    "title": "Educated",
+    "author": "Aldous Huxley",
+    "category": "Fiction",
+    "isbn": "978-448-337-20711-4",
+    "status": "Available"
+  },
+  {
+    "id": 2,
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "Fyodor Dostoevsky",
+    "category": "Non-Fiction",
+    "isbn": "978-449-651-21835-3",
+    "status": "On Loan"
+  },
+  {
+    "id": 3,
+    "title": "The Catcher in the Rye",
+    "author": "Harper Lee",
+    "category": "Fiction",
+    "isbn": "978-197-230-31947-6",
+    "status": "On Loan"
+  },
+  {
+    "id": 4,
+    "title": "Thinking, Fast and Slow",
+    "author": "J.K. Rowling",
+    "category": "Academic",
+    "isbn": "978-994-048-47301-7",
+    "status": "On Loan"
+  },
+  {
+    "id": 5,
+    "title": "Introduction to Algorithms",
+    "author": "Fyodor Dostoevsky",
+    "category": "Children",
+    "isbn": "978-090-419-03258-6",
+    "status": "Overdue"
+  },
+  {
+    "id": 6,
+    "title": "1984",
+    "author": "Markus Zusak",
+    "category": "Children",
+    "isbn": "978-176-210-97494-4",
+    "status": "On Loan"
+  },
+  {
+    "id": 7,
+    "title": "Moby-Dick",
+    "author": "Aldous Huxley",
+    "category": "Academic",
+    "isbn": "978-043-091-28452-1",
+    "status": "Overdue"
+  },
+  {
+    "id": 8,
+    "title": "Charlotte's Web",
+    "author": "Stephen Hawking",
+    "category": "Non-Fiction",
+    "isbn": "978-528-383-72187-0",
+    "status": "On Loan"
+  },
+  {
+    "id": 9,
+    "title": "Thinking, Fast and Slow",
+    "author": "Cormac McCarthy",
+    "category": "Academic",
+    "isbn": "978-225-997-61530-5",
+    "status": "Available"
+  },
+  {
+    "id": 10,
+    "title": "The Book Thief",
+    "author": "Stephen Hawking",
+    "category": "Children",
+    "isbn": "978-938-097-62401-9",
+    "status": "On Loan"
+  },
+  {
+    "id": 11,
+    "title": "The Selfish Gene",
+    "author": "Herman Melville",
+    "category": "Children",
+    "isbn": "978-645-599-05628-5",
+    "status": "Available"
+  },
+  {
+    "id": 12,
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "Charlotte Bront\u00eb",
+    "category": "Fiction",
+    "isbn": "978-433-934-11729-4",
+    "status": "On Loan"
+  },
+  {
+    "id": 13,
+    "title": "The Book Thief",
+    "author": "Cormac McCarthy",
+    "category": "Fiction",
+    "isbn": "978-155-386-10256-3",
+    "status": "On Loan"
+  },
+  {
+    "id": 14,
+    "title": "Pride and Prejudice",
+    "author": "Yuval Noah Harari",
+    "category": "Children",
+    "isbn": "978-178-803-61919-5",
+    "status": "Available"
+  },
+  {
+    "id": 15,
+    "title": "Fahrenheit 451",
+    "author": "Roald Dahl",
+    "category": "Children",
+    "isbn": "978-718-744-38040-8",
+    "status": "On Loan"
+  },
+  {
+    "id": 16,
+    "title": "Sapiens: A Brief History of Humankind",
+    "author": "Raymond A. Serway",
+    "category": "Children",
+    "isbn": "978-585-690-73718-4",
+    "status": "Available"
+  },
+  {
+    "id": 17,
+    "title": "Jane Eyre",
+    "author": "Tara Westover",
+    "category": "Academic",
+    "isbn": "978-517-075-11356-0",
+    "status": "Overdue"
+  },
+  {
+    "id": 18,
+    "title": "Pride and Prejudice",
+    "author": "J.D. Salinger",
+    "category": "Fiction",
+    "isbn": "978-498-144-80021-3",
+    "status": "Available"
+  },
+  {
+    "id": 19,
+    "title": "The Catcher in the Rye",
+    "author": "Fyodor Dostoevsky",
+    "category": "Children",
+    "isbn": "978-028-955-64267-0",
+    "status": "Available"
+  },
+  {
+    "id": 20,
+    "title": "Les Mis\u00e9rables",
+    "author": "Daniel Kahneman",
+    "category": "Fiction",
+    "isbn": "978-625-625-05285-4",
+    "status": "Available"
+  },
+  {
+    "id": 21,
+    "title": "Brave New World",
+    "author": "Thomas H. Cormen",
+    "category": "Fiction",
+    "isbn": "978-937-803-90220-6",
+    "status": "Overdue"
+  },
+  {
+    "id": 22,
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "category": "Academic",
+    "isbn": "978-557-195-07623-5",
+    "status": "Overdue"
+  },
+  {
+    "id": 23,
+    "title": "Pride and Prejudice",
+    "author": "Raymond A. Serway",
+    "category": "Fiction",
+    "isbn": "978-097-199-54966-7",
+    "status": "Available"
+  },
+  {
+    "id": 24,
+    "title": "Sapiens: A Brief History of Humankind",
+    "author": "Cormac McCarthy",
+    "category": "Non-Fiction",
+    "isbn": "978-371-827-29005-4",
+    "status": "Available"
+  },
+  {
+    "id": 25,
+    "title": "Educated",
+    "author": "J.K. Rowling",
+    "category": "Fiction",
+    "isbn": "978-616-343-15873-9",
+    "status": "Available"
+  },
+  {
+    "id": 26,
+    "title": "Matilda",
+    "author": "J.D. Salinger",
+    "category": "Academic",
+    "isbn": "978-328-114-63957-8",
+    "status": "Overdue"
+  },
+  {
+    "id": 27,
+    "title": "Educated",
+    "author": "Paulo Coelho",
+    "category": "Non-Fiction",
+    "isbn": "978-731-915-83152-5",
+    "status": "Overdue"
+  },
+  {
+    "id": 28,
+    "title": "1984",
+    "author": "Yuval Noah Harari",
+    "category": "Fiction",
+    "isbn": "978-275-188-89310-9",
+    "status": "Overdue"
+  },
+  {
+    "id": 29,
+    "title": "Thinking, Fast and Slow",
+    "author": "Jane Austen",
+    "category": "Academic",
+    "isbn": "978-379-750-05116-7",
+    "status": "On Loan"
+  },
+  {
+    "id": 30,
+    "title": "The Road",
+    "author": "Daniel Kahneman",
+    "category": "Academic",
+    "isbn": "978-759-985-53634-1",
+    "status": "Overdue"
+  },
+  {
+    "id": 31,
+    "title": "The Hobbit",
+    "author": "Herman Melville",
+    "category": "Academic",
+    "isbn": "978-998-598-34340-2",
+    "status": "On Loan"
+  },
+  {
+    "id": 32,
+    "title": "Thinking, Fast and Slow",
+    "author": "George Orwell",
+    "category": "Academic",
+    "isbn": "978-206-098-08888-5",
+    "status": "Available"
+  },
+  {
+    "id": 33,
+    "title": "To Kill a Mockingbird",
+    "author": "F. Scott Fitzgerald",
+    "category": "Non-Fiction",
+    "isbn": "978-539-619-73553-7",
+    "status": "On Loan"
+  },
+  {
+    "id": 34,
+    "title": "The Selfish Gene",
+    "author": "Charlotte Bront\u00eb",
+    "category": "Fiction",
+    "isbn": "978-897-906-88999-5",
+    "status": "On Loan"
+  },
+  {
+    "id": 35,
+    "title": "Les Mis\u00e9rables",
+    "author": "J.R.R. Tolkien",
+    "category": "Academic",
+    "isbn": "978-678-071-63758-8",
+    "status": "Overdue"
+  },
+  {
+    "id": 36,
+    "title": "Physics for Scientists and Engineers",
+    "author": "Harper Lee",
+    "category": "Academic",
+    "isbn": "978-846-475-57768-3",
+    "status": "Available"
+  },
+  {
+    "id": 37,
+    "title": "Les Mis\u00e9rables",
+    "author": "J.K. Rowling",
+    "category": "Academic",
+    "isbn": "978-375-096-08551-6",
+    "status": "Available"
+  },
+  {
+    "id": 38,
+    "title": "Crime and Punishment",
+    "author": "Yuval Noah Harari",
+    "category": "Academic",
+    "isbn": "978-712-660-30931-6",
+    "status": "On Loan"
+  },
+  {
+    "id": 39,
+    "title": "Fahrenheit 451",
+    "author": "J.D. Salinger",
+    "category": "Fiction",
+    "isbn": "978-124-376-61364-9",
+    "status": "On Loan"
+  },
+  {
+    "id": 40,
+    "title": "Fahrenheit 451",
+    "author": "Aldous Huxley",
+    "category": "Children",
+    "isbn": "978-010-483-83557-9",
+    "status": "On Loan"
+  },
+  {
+    "id": 41,
+    "title": "The Great Gatsby",
+    "author": "Daniel Kahneman",
+    "category": "Fiction",
+    "isbn": "978-002-317-64808-2",
+    "status": "On Loan"
+  },
+  {
+    "id": 42,
+    "title": "Thinking, Fast and Slow",
+    "author": "Richard Dawkins",
+    "category": "Academic",
+    "isbn": "978-642-940-52623-8",
+    "status": "Overdue"
+  },
+  {
+    "id": 43,
+    "title": "Brave New World",
+    "author": "J.K. Rowling",
+    "category": "Fiction",
+    "isbn": "978-667-239-99114-7",
+    "status": "On Loan"
+  },
+  {
+    "id": 44,
+    "title": "Jane Eyre",
+    "author": "Jane Austen",
+    "category": "Academic",
+    "isbn": "978-740-841-71560-0",
+    "status": "On Loan"
+  },
+  {
+    "id": 45,
+    "title": "To Kill a Mockingbird",
+    "author": "Thomas H. Cormen",
+    "category": "Children",
+    "isbn": "978-444-417-40586-9",
+    "status": "On Loan"
+  },
+  {
+    "id": 46,
+    "title": "A Brief History of Time",
+    "author": "Fyodor Dostoevsky",
+    "category": "Academic",
+    "isbn": "978-947-441-67946-7",
+    "status": "On Loan"
+  },
+  {
+    "id": 47,
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "Tara Westover",
+    "category": "Children",
+    "isbn": "978-825-281-79395-5",
+    "status": "Overdue"
+  },
+  {
+    "id": 48,
+    "title": "The Catcher in the Rye",
+    "author": "Jane Austen",
+    "category": "Fiction",
+    "isbn": "978-918-013-57076-4",
+    "status": "Overdue"
+  },
+  {
+    "id": 49,
+    "title": "Sapiens: A Brief History of Humankind",
+    "author": "Ray Bradbury",
+    "category": "Fiction",
+    "isbn": "978-469-343-03890-4",
+    "status": "On Loan"
+  },
+  {
+    "id": 50,
+    "title": "The Great Gatsby",
+    "author": "Thomas H. Cormen",
+    "category": "Children",
+    "isbn": "978-498-060-50428-0",
+    "status": "Overdue"
+  },
+  {
+    "id": 51,
+    "title": "Educated",
+    "author": "Tara Westover",
+    "category": "Fiction",
+    "isbn": "978-970-052-59451-7",
+    "status": "On Loan"
+  },
+  {
+    "id": 52,
+    "title": "The Alchemist",
+    "author": "George Orwell",
+    "category": "Fiction",
+    "isbn": "978-118-758-57340-4",
+    "status": "Overdue"
+  },
+  {
+    "id": 53,
+    "title": "The Alchemist",
+    "author": "F. Scott Fitzgerald",
+    "category": "Fiction",
+    "isbn": "978-893-468-85172-4",
+    "status": "On Loan"
+  },
+  {
+    "id": 54,
+    "title": "To Kill a Mockingbird",
+    "author": "Ray Bradbury",
+    "category": "Academic",
+    "isbn": "978-379-252-06370-6",
+    "status": "On Loan"
+  },
+  {
+    "id": 55,
+    "title": "Fahrenheit 451",
+    "author": "Yuval Noah Harari",
+    "category": "Fiction",
+    "isbn": "978-773-275-90700-1",
+    "status": "On Loan"
+  },
+  {
+    "id": 56,
+    "title": "The Alchemist",
+    "author": "Harper Lee",
+    "category": "Fiction",
+    "isbn": "978-420-801-10882-2",
+    "status": "On Loan"
+  },
+  {
+    "id": 57,
+    "title": "A Brief History of Time",
+    "author": "Tara Westover",
+    "category": "Children",
+    "isbn": "978-417-932-70278-4",
+    "status": "Overdue"
+  },
+  {
+    "id": 58,
+    "title": "Thinking, Fast and Slow",
+    "author": "Victor Hugo",
+    "category": "Academic",
+    "isbn": "978-686-125-15093-6",
+    "status": "Available"
+  },
+  {
+    "id": 59,
+    "title": "Fahrenheit 451",
+    "author": "F. Scott Fitzgerald",
+    "category": "Academic",
+    "isbn": "978-903-666-78618-6",
+    "status": "Overdue"
+  },
+  {
+    "id": 60,
+    "title": "Jane Eyre",
+    "author": "Daniel Kahneman",
+    "category": "Fiction",
+    "isbn": "978-998-436-45035-2",
+    "status": "Available"
+  },
+  {
+    "id": 61,
+    "title": "Crime and Punishment",
+    "author": "F. Scott Fitzgerald",
+    "category": "Non-Fiction",
+    "isbn": "978-503-397-05730-4",
+    "status": "Overdue"
+  },
+  {
+    "id": 62,
+    "title": "The Alchemist",
+    "author": "Stephen Hawking",
+    "category": "Children",
+    "isbn": "978-455-582-36895-0",
+    "status": "On Loan"
+  },
+  {
+    "id": 63,
+    "title": "A Brief History of Time",
+    "author": "Roald Dahl",
+    "category": "Non-Fiction",
+    "isbn": "978-681-780-77904-5",
+    "status": "Available"
+  },
+  {
+    "id": 64,
+    "title": "Matilda",
+    "author": "Paulo Coelho",
+    "category": "Non-Fiction",
+    "isbn": "978-739-765-53990-1",
+    "status": "On Loan"
+  },
+  {
+    "id": 65,
+    "title": "The Great Gatsby",
+    "author": "J.K. Rowling",
+    "category": "Non-Fiction",
+    "isbn": "978-804-526-09952-2",
+    "status": "On Loan"
+  },
+  {
+    "id": 66,
+    "title": "The Great Gatsby",
+    "author": "Victor Hugo",
+    "category": "Children",
+    "isbn": "978-232-960-13807-8",
+    "status": "On Loan"
+  },
+  {
+    "id": 67,
+    "title": "Thinking, Fast and Slow",
+    "author": "Herman Melville",
+    "category": "Academic",
+    "isbn": "978-390-098-79628-7",
+    "status": "On Loan"
+  },
+  {
+    "id": 68,
+    "title": "Moby-Dick",
+    "author": "Tara Westover",
+    "category": "Fiction",
+    "isbn": "978-536-535-18525-0",
+    "status": "On Loan"
+  },
+  {
+    "id": 69,
+    "title": "Brave New World",
+    "author": "Raymond A. Serway",
+    "category": "Non-Fiction",
+    "isbn": "978-003-771-48444-4",
+    "status": "Overdue"
+  },
+  {
+    "id": 70,
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "J.K. Rowling",
+    "category": "Academic",
+    "isbn": "978-985-621-66247-5",
+    "status": "On Loan"
+  },
+  {
+    "id": 71,
+    "title": "To Kill a Mockingbird",
+    "author": "Jane Austen",
+    "category": "Children",
+    "isbn": "978-209-545-05633-5",
+    "status": "On Loan"
+  },
+  {
+    "id": 72,
+    "title": "Charlotte's Web",
+    "author": "Raymond A. Serway",
+    "category": "Non-Fiction",
+    "isbn": "978-707-193-05164-6",
+    "status": "Overdue"
+  },
+  {
+    "id": 73,
+    "title": "Brave New World",
+    "author": "George Orwell",
+    "category": "Fiction",
+    "isbn": "978-763-834-00513-3",
+    "status": "Available"
+  },
+  {
+    "id": 74,
+    "title": "The Road",
+    "author": "Cormac McCarthy",
+    "category": "Children",
+    "isbn": "978-094-407-66632-4",
+    "status": "On Loan"
+  },
+  {
+    "id": 75,
+    "title": "To Kill a Mockingbird",
+    "author": "Roald Dahl",
+    "category": "Academic",
+    "isbn": "978-415-061-45886-1",
+    "status": "Overdue"
+  },
+  {
+    "id": 76,
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "Raymond A. Serway",
+    "category": "Non-Fiction",
+    "isbn": "978-741-833-30925-3",
+    "status": "Available"
+  },
+  {
+    "id": 77,
+    "title": "Fahrenheit 451",
+    "author": "Jane Austen",
+    "category": "Fiction",
+    "isbn": "978-358-678-47558-2",
+    "status": "On Loan"
+  },
+  {
+    "id": 78,
+    "title": "The Catcher in the Rye",
+    "author": "Richard Dawkins",
+    "category": "Fiction",
+    "isbn": "978-959-429-55141-1",
+    "status": "Overdue"
+  },
+  {
+    "id": 79,
+    "title": "The Great Gatsby",
+    "author": "Richard Dawkins",
+    "category": "Fiction",
+    "isbn": "978-784-715-48975-4",
+    "status": "Available"
+  },
+  {
+    "id": 80,
+    "title": "The Selfish Gene",
+    "author": "Roald Dahl",
+    "category": "Children",
+    "isbn": "978-860-743-39122-7",
+    "status": "Overdue"
+  },
+  {
+    "id": 81,
+    "title": "To Kill a Mockingbird",
+    "author": "Raymond A. Serway",
+    "category": "Academic",
+    "isbn": "978-871-424-29633-4",
+    "status": "On Loan"
+  },
+  {
+    "id": 82,
+    "title": "Jane Eyre",
+    "author": "F. Scott Fitzgerald",
+    "category": "Fiction",
+    "isbn": "978-151-309-62707-7",
+    "status": "On Loan"
+  },
+  {
+    "id": 83,
+    "title": "The Alchemist",
+    "author": "Charlotte Bront\u00eb",
+    "category": "Children",
+    "isbn": "978-313-121-87197-8",
+    "status": "On Loan"
+  },
+  {
+    "id": 84,
+    "title": "Thinking, Fast and Slow",
+    "author": "Tara Westover",
+    "category": "Children",
+    "isbn": "978-886-691-59893-5",
+    "status": "Overdue"
+  },
+  {
+    "id": 85,
+    "title": "The Hobbit",
+    "author": "Paulo Coelho",
+    "category": "Children",
+    "isbn": "978-327-324-18360-1",
+    "status": "Available"
+  },
+  {
+    "id": 86,
+    "title": "Jane Eyre",
+    "author": "Roald Dahl",
+    "category": "Children",
+    "isbn": "978-897-458-41661-2",
+    "status": "Available"
+  },
+  {
+    "id": 87,
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "Stephen Hawking",
+    "category": "Academic",
+    "isbn": "978-104-147-26960-2",
+    "status": "Overdue"
+  },
+  {
+    "id": 88,
+    "title": "Introduction to Algorithms",
+    "author": "E.B. White",
+    "category": "Fiction",
+    "isbn": "978-773-153-72337-9",
+    "status": "On Loan"
+  },
+  {
+    "id": 89,
+    "title": "Fahrenheit 451",
+    "author": "Charlotte Bront\u00eb",
+    "category": "Academic",
+    "isbn": "978-798-604-53082-0",
+    "status": "Available"
+  },
+  {
+    "id": 90,
+    "title": "The Great Gatsby",
+    "author": "Aldous Huxley",
+    "category": "Fiction",
+    "isbn": "978-560-319-87500-3",
+    "status": "On Loan"
+  },
+  {
+    "id": 91,
+    "title": "Charlotte's Web",
+    "author": "J.R.R. Tolkien",
+    "category": "Non-Fiction",
+    "isbn": "978-768-406-81923-8",
+    "status": "On Loan"
+  },
+  {
+    "id": 92,
+    "title": "Physics for Scientists and Engineers",
+    "author": "Ray Bradbury",
+    "category": "Non-Fiction",
+    "isbn": "978-996-541-50832-4",
+    "status": "Overdue"
+  },
+  {
+    "id": 93,
+    "title": "Les Mis\u00e9rables",
+    "author": "Ray Bradbury",
+    "category": "Children",
+    "isbn": "978-833-859-78019-6",
+    "status": "Overdue"
+  },
+  {
+    "id": 94,
+    "title": "The Book Thief",
+    "author": "Yuval Noah Harari",
+    "category": "Children",
+    "isbn": "978-780-191-22596-4",
+    "status": "On Loan"
+  },
+  {
+    "id": 95,
+    "title": "Fahrenheit 451",
+    "author": "Raymond A. Serway",
+    "category": "Non-Fiction",
+    "isbn": "978-965-188-07591-0",
+    "status": "On Loan"
+  },
+  {
+    "id": 96,
+    "title": "The Great Gatsby",
+    "author": "Yuval Noah Harari",
+    "category": "Children",
+    "isbn": "978-902-847-30220-6",
+    "status": "Overdue"
+  },
+  {
+    "id": 97,
+    "title": "Educated",
+    "author": "Charlotte Bront\u00eb",
+    "category": "Fiction",
+    "isbn": "978-799-952-97493-0",
+    "status": "On Loan"
+  },
+  {
+    "id": 98,
+    "title": "The Catcher in the Rye",
+    "author": "Daniel Kahneman",
+    "category": "Children",
+    "isbn": "978-314-725-10330-7",
+    "status": "On Loan"
+  },
+  {
+    "id": 99,
+    "title": "Fahrenheit 451",
+    "author": "Thomas H. Cormen",
+    "category": "Non-Fiction",
+    "isbn": "978-737-939-58464-3",
+    "status": "Overdue"
+  },
+  {
+    "id": 100,
+    "title": "Moby-Dick",
+    "author": "E.B. White",
+    "category": "Academic",
+    "isbn": "978-916-116-00222-0",
+    "status": "Overdue"
+  }
+]

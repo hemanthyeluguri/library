@@ -1,0 +1,140 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<div class="container mt-2">
+  <h2>Book Management</h2>
+  <p>Manage your library's book collection</p>
+
+  <div class="d-flex justify-content-between mb-3">
+    <input type="text" class="form-control w-50 me-2" placeholder="Search books..." [(ngModel)]="searchTerm"
+      (input)="onSearchChange()" />
+
+    <select class="form-select w-25" [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+    <!-- Add Book Button -->
+    <div class="col-md-2">
+      <a class="btn btn-outline-primary w-100" (click)="toggleAddForm(); scrollToTop()">
+        <i class="bi bi-plus"></i> Add Book
+      </a>
+    </div>
+
+    <!-- Add Book Form -->
+    <div *ngIf="showAddForm" class="add-book-form mt-3" #top>
+      <div class="container">
+      <form (ngSubmit)="submitForm()" #bookForm="ngForm">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" [(ngModel)]="newBook.title" name="title" required>
+        </div>
+
+        <div class="form-group">
+          <label>Author</label>
+          <input type="text" class="form-control" [(ngModel)]="newBook.author" name="author" required>
+        </div>
+
+        <div class="form-group">
+          <label>Category</label>
+          <input type="text" class="form-control" [(ngModel)]="newBook.category" name="category" required>
+        </div>
+
+        <div class="form-group">
+          <label>ISBN</label>
+          <input type="text" class="form-control" [(ngModel)]="newBook.isbn" name="isbn" required>
+        </div>
+
+        <div class="form-group">
+          <label>Total Books</label>
+          <input type="number" class="form-control" [(ngModel)]="newBook.totalbooks" name="totalbooks" required>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-2">Submit</button>
+      </form>
+      </div>
+    </div>
+
+  </div>
+
+  <table class="table table-hover">
+    <thead class="table-light">
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>ISBN</th>
+        <th>Total Books</th>
+        <th>Available</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of filteredBooks | paginate: { itemsPerPage: 8, currentPage: page }, let i = index">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>
+          <span class="badge badge-pill custom-badge" [ngClass]="{
+            'badge-blue': book.category === 'Fiction',
+            'badge-green': book.category === 'Non‑Fiction',
+            'badge-yellow': book.category === 'Academic',
+            'badge-cyan': book.category === 'Children'
+            }">
+            {{ book.category }}
+          </span>
+        </td>
+        <td>{{ book.isbn }}</td>
+        <td>
+          <!-- <span class="badge badge-pill custom-badge" [ngClass]="{
+                  'badge-blue': book.status === 'Available',
+                  'badge-yellow': book.status === 'On Loan',
+                  'badge-red': book.status === 'Overdue'
+                }">
+            {{ book.status }}
+          </span> -->
+          {{ book.totalbooks }}
+        </td>
+        <td>
+          {{ book.available }}
+        </td>
+        <td>
+          <button id="edit" class="icon me-2 btn btn-link p-0" (click)="openEditModal(i)">
+            <span class="fas fa-edit me-2"></span>
+          </button>
+          <button class="icon btn btn-link p-0" (click)="deleteBook(book.id)">
+            <span class="bi bi-trash-fill"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="ngx-pagination">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>
+<!-- Edit Model -->
+<div class="modal" *ngIf="isEditModalOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closeEditModal()">&times;</span>
+    <h2>Edit Book</h2>
+
+    <form (ngSubmit)="saveEdit()">
+      <label>Title:</label>
+      <input [(ngModel)]="editedBook.title" name="title" required />
+
+      <label>Author:</label>
+      <input [(ngModel)]="editedBook.author" name="author" required />
+
+      <label>Category:</label>
+      <input [(ngModel)]="editedBook.category" name="category" required />
+
+      <label>ISBN:</label>
+      <input [(ngModel)]="editedBook.isbn" name="isbn" required />
+
+      <label>Total Books:</label>
+      <input type="number" [(ngModel)]="editedBook.totalbooks" name="totalbooks" required />
+
+      <label>Available:</label>
+      <input type="number" [(ngModel)]="editedBook.available" name="available" required />
+
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</div>
