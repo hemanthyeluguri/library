@@ -1,1 +1,160 @@
-<p>members works!</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<div class="container mt-2">
+  <h2>Members Management</h2>
+  <p>Manage your library's members</p>
+
+  <div class="d-flex justify-content-between mb-3 flex-wrap">
+    <input type="text" class="form-control w-50 me-2" placeholder="Search members..." [(ngModel)]="searchTerm"
+      (input)="onSearchChange()" />
+
+    <select class="form-select w-25" [(ngModel)]="selectedBranch" (change)="onBranchChange()">
+      <option *ngFor="let branch of branches" [value]="branch">{{ branch }}</option>
+    </select>
+
+    <div class="col-md-2">
+      <a class="btn btn-outline-primary w-100" (click)="toggleAddForm(); scrollToTop()">
+        <i class="fas fa-user-plus"></i> Add Member
+      </a>
+    </div>
+  </div>
+
+  <!-- Add Member Form -->
+  <div *ngIf="showAddForm" class="add-member-form mt-3" #top>
+    <div class="container">
+      <form (ngSubmit)="submitForm()" #memberForm="ngForm">
+        <div class="form-group">
+          <label>Admission ID</label>
+          <input type="number" class="form-control" [(ngModel)]="newMember.admission_id" name="admission_id" required>
+        </div>
+
+        <div class="form-group">
+          <label>PIN No</label>
+          <input type="text" class="form-control" [(ngModel)]="newMember.pin_no" name="pin_no" required>
+        </div>
+
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control" [(ngModel)]="newMember.name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label>Degree</label>
+          <input type="text" class="form-control" [(ngModel)]="newMember.degree" name="degree" required>
+        </div>
+
+        <div class="form-group">
+          <label>Branch</label>
+          <input type="text" class="form-control" [(ngModel)]="newMember.branch" name="branch" required>
+        </div>
+
+        <div class="form-group">
+          <label>Year</label>
+          <input type="number" class="form-control" [(ngModel)]="newMember.year" name="year" required>
+        </div>
+
+        <div class="form-group">
+          <label>Status</label>
+          <select class="form-select" [(ngModel)]="newMember.status" name="status" required>
+            <option value="Active">Active</option>
+            <option value="Alumni">Alumni</option>
+            <option value="Suspended">Suspended</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-2">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Member List Table -->
+  <table class="table table-hover mt-4">
+    <thead class="table-light">
+      <tr>
+        <th>PIN</th>
+        <th>Name</th>
+        <th>Degree</th>
+        <th>Branch</th>
+        <th>Year</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let member of filteredMembers | paginate: { itemsPerPage: 8, currentPage: page }; let i = index">
+        <td>{{ member.pin_no }}</td>
+        <td>{{ member.name }}</td>
+        <td>{{ member.degree }}</td>
+        <td>
+          <span class="badge custom-badge" [ngClass]="{
+              'badge-orange': member.branch === 'EEE',
+              'badge-green': member.branch === 'Mech',
+              'badge-teal': member.branch === 'Civil',
+              'badge-yellow': member.branch === 'ECE',
+              'badge-blue': member.branch === 'CSE',
+              'badge-indigo': member.branch === 'CDS',
+              'badge-red': member.branch === 'AIML',
+              'badge-pink': member.branch === 'CS'
+            }">
+          {{ member.branch }}
+          </span>
+        </td>
+        <td>{{ member.year }}</td>
+        <td>
+          <span class="badge" [ngClass]="{
+              'blue-outline': member.status === 'Active',
+              'red-outline': member.status === 'Expire'
+            }">
+            {{ member.status }}
+          </span>
+        </td>
+        <td>
+          <button id="edit" class="icon me-2 btn btn-link p-0" (click)="openEditModal(i)">
+            <span class="fas fa-edit me-2"></span>
+          </button>
+          <button class="icon btn btn-link p-0" (click)="deleteMember(member.admission_id)">
+            <span class="bi bi-trash-fill"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="ngx-pagination">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal" *ngIf="isEditModalOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closeEditModal()">&times;</span>
+    <h2>Edit Member</h2>
+
+    <form (ngSubmit)="saveEdit()">
+      <label>PIN No:</label>
+      <input [(ngModel)]="editedMember.pin_no" name="pin_no" required />
+
+      <label>Name:</label>
+      <input [(ngModel)]="editedMember.name" name="name" required />
+
+      <label>Degree:</label>
+      <input [(ngModel)]="editedMember.degree" name="degree" required />
+
+      <label>Branch:</label>
+      <input [(ngModel)]="editedMember.branch" name="branch" required />
+
+      <label>Year:</label>
+      <input type="number" [(ngModel)]="editedMember.year" name="year" required />
+
+      <label>Status:</label>
+      <select [(ngModel)]="editedMember.status" name="status" required>
+        <option value="Active">Active</option>
+        <option value="Alumni">Alumni</option>
+        <option value="Suspended">Suspended</option>
+      </select>
+
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</div>
