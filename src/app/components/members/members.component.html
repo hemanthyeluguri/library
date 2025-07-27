@@ -73,7 +73,6 @@
       <tr>
         <th>PIN</th>
         <th>Name</th>
-        <th>Degree</th>
         <th>Branch</th>
         <th>Year</th>
         <th>Status</th>
@@ -84,7 +83,6 @@
       <tr *ngFor="let member of filteredMembers | paginate: { itemsPerPage: 8, currentPage: page }; let i = index">
         <td>{{ member.pin_no }}</td>
         <td>{{ member.name }}</td>
-        <td>{{ member.degree }}</td>
         <td>
           <span class="badge custom-badge" [ngClass]="{
               'badge-orange': member.branch === 'EEE',
@@ -96,7 +94,7 @@
               'badge-red': member.branch === 'AIML',
               'badge-pink': member.branch === 'CS'
             }">
-          {{ member.branch }}
+            {{ member.branch }}
           </span>
         </td>
         <td>{{ member.year }}</td>
@@ -129,32 +127,53 @@
 <div class="modal" *ngIf="isEditModalOpen">
   <div class="modal-content">
     <span class="close" (click)="closeEditModal()">&times;</span>
-    <h2>Edit Member</h2>
 
-    <form (ngSubmit)="saveEdit()">
-      <label>PIN No:</label>
-      <input [(ngModel)]="editedMember.pin_no" name="pin_no" required />
+    <div *ngIf="editedMember.pin_no != null && editedMember.pin_no !== ''; else noAccess" class="edit-form">
+      <h4>Tutorial</h4>
+      <form (ngSubmit)="updateMember()" #editForm="ngForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="editedMember.name" name="name" required />
+        </div>
 
-      <label>Name:</label>
-      <input [(ngModel)]="editedMember.name" name="name" required />
+        <div class="form-group">
+          <label for="degree">Degree</label>
+          <input type="text" class="form-control" id="degree" [(ngModel)]="editedMember.degree" name="degree" required />
+        </div>
 
-      <label>Degree:</label>
-      <input [(ngModel)]="editedMember.degree" name="degree" required />
+        <div class="form-group">
+          <label for="branch">Branch</label>
+          <input type="text" class="form-control" id="branch" [(ngModel)]="editedMember.branch" name="branch" />
+        </div>
 
-      <label>Branch:</label>
-      <input [(ngModel)]="editedMember.branch" name="branch" required />
+        <div class="form-group">
+          <label for="year">Year</label>
+          <select class="form-select" [(ngModel)]="editedMember.year" name="year" required>
+            <option value="1">1st year</option>
+            <option value="2">2nd year</option>
+            <option value="3">3rd year</option>
+            <option value="4">4th year</option>
+          </select>
+        </div>
 
-      <label>Year:</label>
-      <input type="number" [(ngModel)]="editedMember.year" name="year" required />
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select class="form-select" [(ngModel)]="editedMember.status" name="status" required>
+            <option value="Active">Active</option>
+            <option value="Alumni">Alumni</option>
+            <option value="Suspended">Suspended</option>
+          </select>
+        </div>
+        
+        <button type="submit" class="btn btn-outline-success mt-3">
+          Update
+        </button>
+      </form>
+      <p>{{ message }}</p>
+    </div>
 
-      <label>Status:</label>
-      <select [(ngModel)]="editedMember.status" name="status" required>
-        <option value="Active">Active</option>
-        <option value="Alumni">Alumni</option>
-        <option value="Suspended">Suspended</option>
-      </select>
-
-      <button type="submit">Save</button>
-    </form>
+    <ng-template #noAccess>
+      <p>Cannot access this Tutorial...</p>
+    </ng-template>
   </div>
 </div>

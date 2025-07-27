@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Book } from 'src/app/models/book.model';
 import { BookService } from 'src/app/services/book.service';
 import { ChangeDetectorRef } from '@angular/core';
@@ -16,7 +16,6 @@ export class BooksComponent implements OnInit {
   page: number = 1;
   editingBook: Book | null = null;
   isEditModalOpen = false;
-  editedBook: Book = {} as Book;
   editIndex: number | null = null;
 
   // add book
@@ -34,7 +33,16 @@ export class BooksComponent implements OnInit {
 
   @ViewChild('top') topElement!: ElementRef;
 
-
+  @Input() editedBook: Book = {
+    id: 0,
+    title: '',
+    author: '',
+    category: '',
+    isbn: '',
+    totalbooks: 0,
+    available: 0
+  }
+    message: '' | undefined;
   constructor(private bookService: BookService, private cdr: ChangeDetectorRef) { }
 
  
@@ -66,7 +74,22 @@ export class BooksComponent implements OnInit {
       book.category.toLowerCase().includes(term)
     );
   }
+  updateBook(): void {
+    this.message = '';
 
+    this.bookService
+      .update(this.editedBook.id, this.editedBook)
+      .subscribe({
+        
+        next: (res) => {
+          console.log(res);
+          this.message = res.message
+            ? res.message
+            : 'This data was updated successfully!';
+        },
+        error: (e) => console.error(e)
+      });
+  }
    // add book
 
   toggleAddForm() {
@@ -124,22 +147,6 @@ export class BooksComponent implements OnInit {
     this.editedBook = {} as Book;
   }
 
-   saveEdit(): void {
-    if (this.editIndex !== null) {
-      const bookId = this.books[this.editIndex].id; // ensure your Book model has an `id`
-      this.bookService.updateBook(bookId, this.editedBook).subscribe(
-        updatedBook => {
-          this.books[this.editIndex!] = updatedBook; // update UI
-          this.closeEditModal();
-        },
-        error => {
-          console.error('Update failed', error);
-        }
-      );
-    }
-  }
-
-  // Cancel editing
   cancelEdit() {
     this.editingBook = null;
   }

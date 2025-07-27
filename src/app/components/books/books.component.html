@@ -82,13 +82,6 @@
         </td>
         <td>{{ book.isbn }}</td>
         <td>
-          <!-- <span class="badge badge-pill custom-badge" [ngClass]="{
-                  'badge-blue': book.status === 'Available',
-                  'badge-yellow': book.status === 'On Loan',
-                  'badge-red': book.status === 'Overdue'
-                }">
-            {{ book.status }}
-          </span> -->
           {{ book.totalbooks }}
         </td>
         <td>
@@ -110,31 +103,43 @@
   </div>
 </div>
 <!-- Edit Model -->
+
 <div class="modal" *ngIf="isEditModalOpen">
   <div class="modal-content">
     <span class="close" (click)="closeEditModal()">&times;</span>
-    <h2>Edit Book</h2>
 
-    <form (ngSubmit)="saveEdit()">
-      <label>Title:</label>
-      <input [(ngModel)]="editedBook.title" name="title" required />
+    <div *ngIf="editedBook.title != null && editedBook.title !== ''; else noAccess" class="edit-form">
+      <h4>Tutorial</h4>
+      <form (ngSubmit)="updateBook()" #editForm="ngForm">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" [(ngModel)]="editedBook.title" name="title" required />
+        </div>
 
-      <label>Author:</label>
-      <input [(ngModel)]="editedBook.author" name="author" required />
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input type="text" class="form-control" id="author" [(ngModel)]="editedBook.author" name="author" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="category">Category</label>
+          <input type="text" class="form-control" id="category" [(ngModel)]="editedBook.category" name="category" required />
+        </div>
 
-      <label>Category:</label>
-      <input [(ngModel)]="editedBook.category" name="category" required />
+        <div class="form-group">
+          <label for="isbn">ISBN</label>
+          <input type="text" class="form-control" id="isbn" [(ngModel)]="editedBook.isbn" name="isbn" required />
+        </div>
+        <button type="submit" class="btn btn-outline-success mt-3">
+          Update
+        </button>
+      </form>
+      <p>{{ message }}</p>
+    </div>
 
-      <label>ISBN:</label>
-      <input [(ngModel)]="editedBook.isbn" name="isbn" required />
-
-      <label>Total Books:</label>
-      <input type="number" [(ngModel)]="editedBook.totalbooks" name="totalbooks" required />
-
-      <label>Available:</label>
-      <input type="number" [(ngModel)]="editedBook.available" name="available" required />
-
-      <button type="submit">Save</button>
-    </form>
+    <ng-template #noAccess>
+      <p>Cannot access this Tutorial...</p>
+    </ng-template>
   </div>
 </div>
+

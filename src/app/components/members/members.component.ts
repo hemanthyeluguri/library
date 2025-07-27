@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { Member } from 'src/app/models/members.model';
 import { MembersService } from 'src/app/services/members.service';
@@ -31,9 +31,20 @@ export class MembersComponent implements OnInit {
     status: 'Active'
   };
 
-  editedMember: Member = { ...this.newMember };
-
   @ViewChild('top') topElement!: ElementRef;
+
+
+  @Input() editedMember: Member = {
+    admission_id: 0,
+    pin_no: '',
+    name: '',
+    degree: '',
+    branch: '',
+    year: 0,
+    status: ''
+  };
+
+  message = '';
 
   constructor(
     private memberService: MembersService,
@@ -50,7 +61,22 @@ export class MembersComponent implements OnInit {
       this.applyFilters();
     });
   }
+updateMember(): void {
+    this.message = '';
 
+    this.memberService
+      .update(this.editedMember.admission_id, this.editedMember)
+      .subscribe({
+        
+        next: (res) => {
+          console.log(res);
+          this.message = res.message
+            ? res.message
+            : 'This data was updated successfully!';
+        },
+        error: (e) => console.error(e)
+      });
+  }
   onSearchChange(): void {
     this.applyFilters();
   }
@@ -68,8 +94,6 @@ export class MembersComponent implements OnInit {
   applyFilters(): void {
     const term = this.searchTerm.toLowerCase();
     this.filteredMembers = this.members.filter(member =>
-      member.name.toLowerCase().includes(term) ||
-      member.pin_no.toLowerCase().includes(term) ||
       member.branch.toLowerCase().includes(term)
     );
   }
@@ -110,7 +134,9 @@ export class MembersComponent implements OnInit {
   deleteMember(id: number): void {
     if (confirm('Are you sure you want to delete this member?')) {
       this.memberService.deleteMember(id).subscribe(() => {
-        this.members = this.members.filter(m => m.admission_id !== id);
+        this.members = this.members.filter(m => {
+          return m.admission_id !== id
+        });
         this.applyFilters();
       });
     }
@@ -120,6 +146,8 @@ export class MembersComponent implements OnInit {
     this.editIndex = index;
     this.editedMember = { ...this.members[index] };
     this.isEditModalOpen = true;
+    console.log('Editing member:', this.editedMember);
+
   }
 
   closeEditModal(): void {
@@ -127,19 +155,4 @@ export class MembersComponent implements OnInit {
     this.editedMember = { ...this.newMember };
   }
 
-  saveEdit(): void {
-    if (this.editIndex !== null) {
-      const id = this.members[this.editIndex].admission_id;
-      this.memberService.updateMember(id, this.editedMember).subscribe(
-        updated => {
-          this.members[this.editIndex!] = updated;
-          this.applyFilters();
-          this.closeEditModal();
-        },
-        error => {
-          console.error('Update failed', error);
-        }
-      );
-    }
-  } 
 }

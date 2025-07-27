@@ -33,8 +33,8 @@ export class MembersService {
     return this.http.post<Member>(this.dataUrl, member);
   }
 
-  updateMember(admission_id: number, updatedMember: Member): Observable<Member> {
-    return this.http.put<Member>(`${this.dataUrl}/admission_id/${admission_id}`, updatedMember);
+  update(id: any, data: any): Observable<any> {
+    return this.http.patch(`${this.dataUrl}/admission_id/${id}`, data);
   }
 
   deleteMember(admission_id: number): Observable<any> {

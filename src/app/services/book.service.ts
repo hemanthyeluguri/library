@@ -31,9 +31,9 @@ export class BookService {
   getBookById(id: number): Book | undefined {
     return this.books$.value.find((b) => b.id === id);
   }
-updateBook(id: number, updatedBook: Book): Observable<Book> {
-  return this.http.put<Book>(`${this.dataUrl}/${id}`, updatedBook);
-}
+  update(id: any, data: any): Observable<any> {
+    return this.http.patch(`${this.dataUrl}/id/${id}`, data);
+  }
 
   deleteBook(id: number): Observable<any> {
     const url = `${this.dataUrl}/id/${id}`;

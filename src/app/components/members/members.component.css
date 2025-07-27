@@ -78,12 +78,14 @@
   color: red;
   border: 1px solid red;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .blue-outline {
   color: blue;
   border: 1px solid blue;
   background-color: transparent;
+  cursor: pointer;
 }
 .custom-badge {
   display: inline-flex;
@@ -137,4 +139,7 @@
   align-items: center;
   z-index: 1000;
   
+}
+.btn-outline-success{
+  margin-left: 280px;
 }
