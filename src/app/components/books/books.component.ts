@@ -12,7 +12,7 @@ export class BooksComponent implements OnInit {
   filteredBooks: Book[] = [];
   searchTerm = '';
   selectedCategory = 'All Categories';
-  categories = ['All Categories', 'Fiction', 'Academic', 'Children', 'Non‑Fiction'];
+  categories = ['All Categories', 'Fiction', 'Academic', 'Children', 'Non-Fiction'];
   page: number = 1;
   editingBook: Book | null = null;
   isEditModalOpen = false;
@@ -55,6 +55,7 @@ export class BooksComponent implements OnInit {
     this.bookService.getBooks().subscribe((data) => {
       this.books = data;
       this.applyFilters();
+      
     });
   }
 
@@ -63,7 +64,13 @@ export class BooksComponent implements OnInit {
   }
 
   onCategoryChange(): void {
-    this.bookService.filterBooksByCategory(this.selectedCategory);
+    if (this.selectedCategory === 'All Categories') {
+      this.filteredBooks = [...this.books];
+    } else {
+      this.filteredBooks = this.books.filter(
+        m => m.category.toLowerCase() === this.selectedCategory.toLowerCase()
+      );
+    }
   }
 
   applyFilters(): void {

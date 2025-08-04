@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BookService {
   private books$ = new BehaviorSubject<Book[]>([]);
-  private dataUrl = 'https://sheetdb.io/api/v1/zv6cdpytab5i6';
+  private dataUrl = 'http://localhost:8082/api/books';
 
   constructor(private http: HttpClient) {
     this.loadBooks();
@@ -20,14 +20,12 @@ export class BookService {
     });
   }
 
+  getBooks(): Observable<Book[]> {
+    return this.http.get<Book[]>(this.dataUrl);
+  }
   addBook(book: Book): Observable<Book> {
     return this.http.post<Book>(this.dataUrl, book);
   }
-
-  getBooks(): Observable<Book[]> {
-    return this.books$.asObservable();
-  }
-
   getBookById(id: number): Book | undefined {
     return this.books$.value.find((b) => b.id === id);
   }
@@ -50,9 +48,5 @@ export class BookService {
     ).subscribe(filtered => this.books$.next(filtered));
   }
 
-  private generateId(): number {
-    const current = this.books$.value;
-    return current.length ? Math.max(...current.map(b => b.id)) + 1 : 1;
-  }
 
 }

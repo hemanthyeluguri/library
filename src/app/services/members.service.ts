@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class MembersService {
 
   private members$ = new BehaviorSubject<Member[]>([]);
-  private dataUrl = 'https://sheetdb.io/api/v1/uizunsditzm9o';
+  private dataUrl = 'http://localhost:8082/api/members';
 
   constructor(private http: HttpClient) {
     this.loadMembers();
@@ -22,7 +22,7 @@ export class MembersService {
   }
 
   getMembers(): Observable<Member[]> {
-    return this.members$.asObservable();
+      return this.http.get<Member[]>(this.dataUrl);
   }
 
   getMemberByAdmissionId(admission_id: number): Member | undefined {

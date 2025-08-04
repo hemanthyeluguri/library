@@ -9,7 +9,7 @@ import { MembersService } from 'src/app/services/members.service';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
- members: Member[] = [];
+  members: Member[] = [];
   filteredMembers: Member[] = [];
 
   searchTerm = '';
@@ -28,7 +28,7 @@ export class MembersComponent implements OnInit {
     degree: '',
     branch: '',
     year: 1,
-    status: 'Active'
+    status: 'Active',
   };
 
   @ViewChild('top') topElement!: ElementRef;
@@ -41,7 +41,7 @@ export class MembersComponent implements OnInit {
     degree: '',
     branch: '',
     year: 0,
-    status: ''
+    status: '',
   };
 
   message = '';
@@ -49,7 +49,7 @@ export class MembersComponent implements OnInit {
   constructor(
     private memberService: MembersService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadMembers();
@@ -61,13 +61,13 @@ export class MembersComponent implements OnInit {
       this.applyFilters();
     });
   }
-updateMember(): void {
+  updateMember(): void {
     this.message = '';
 
     this.memberService
       .update(this.editedMember.admission_id, this.editedMember)
       .subscribe({
-        
+
         next: (res) => {
           console.log(res);
           this.message = res.message
@@ -119,7 +119,7 @@ updateMember(): void {
           degree: '',
           branch: '',
           year: 1,
-          status: 'Active'
+          status: 'Active',
         };
         this.showAddForm = false;
         this.loadMembers(); // reload
