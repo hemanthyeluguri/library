@@ -13,14 +13,11 @@ export class BooksComponent implements OnInit {
   searchTerm = '';
   selectedCategory = 'All Categories';
   categories = ['All Categories', 'Fiction', 'Academic', 'Children', 'Non-Fiction'];
-  page: number = 1;
-  editingBook: Book | null = null;
+   page: number = 1;
   isEditModalOpen = false;
   editIndex: number | null = null;
+  isAddModalOpen: boolean = false;
 
-  // add book
-  
-  showAddForm = false;
   newBook: Book = {
     id: 0,
     title: '',
@@ -42,10 +39,10 @@ export class BooksComponent implements OnInit {
     totalbooks: 0,
     available: 0
   }
-    message: '' | undefined;
+  message: '' | undefined;
   constructor(private bookService: BookService, private cdr: ChangeDetectorRef) { }
 
- 
+
   ngOnInit(): void {
     this.loadBooks();
 
@@ -55,7 +52,7 @@ export class BooksComponent implements OnInit {
     this.bookService.getBooks().subscribe((data) => {
       this.books = data;
       this.applyFilters();
-      
+
     });
   }
 
@@ -81,26 +78,9 @@ export class BooksComponent implements OnInit {
       book.category.toLowerCase().includes(term)
     );
   }
-  updateBook(): void {
-    this.message = '';
-
-    this.bookService
-      .update(this.editedBook.id, this.editedBook)
-      .subscribe({
-        
-        next: (res) => {
-          console.log(res);
-          this.message = res.message
-            ? res.message
-            : 'This data was updated successfully!';
-        },
-        error: (e) => console.error(e)
-      });
-  }
-   // add book
-
-  toggleAddForm() {
-    this.showAddForm = !this.showAddForm;
+  // add book
+  openAddModal() {
+    this.isAddModalOpen = true;
   }
 
   scrollToTop() {
@@ -123,7 +103,8 @@ export class BooksComponent implements OnInit {
           totalbooks: 0,
           available: 0
         };
-        this.showAddForm = false;
+        this.isAddModalOpen = false;
+        this.loadBooks();
       },
       error: (err) => {
         console.error(err);
@@ -131,7 +112,52 @@ export class BooksComponent implements OnInit {
       }
     });
   }
+  closeAddModal() {
+    this.isAddModalOpen = false;
+    this.newBook = {
+      id: 0,
+      title: '',
+      author: '',
+      category: '',
+      isbn: '',
+      totalbooks: 0,
+      available: 0
+    };
+  }
 
+  // update book
+    openEditModal(index: number): void {
+    this.editIndex = index;
+    console.log(this.editIndex);
+    this.editedBook = { ...this.books[index] }; // Copy data
+    this.isEditModalOpen = true;
+  }
+
+  updateBook(): void {
+    this.message = '';
+
+    this.bookService
+      .update(this.editedBook.id, this.editedBook)
+      .subscribe({
+
+        next: (res) => {
+          console.log(res);
+          this.message = res.message
+            ? res.message
+            : 'This data was updated successfully!';
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  closeEditModal(): void {
+    this.isEditModalOpen = false;
+    this.editedBook = {} as Book;
+    this.loadBooks();
+    this.message=''
+   }
+
+  // delete book
   deleteBook(id: number): void {
     if (confirm('Are you sure you want to delete this book?')) {
       this.bookService.deleteBook(id).subscribe(() => {
@@ -142,20 +168,4 @@ export class BooksComponent implements OnInit {
       });
     }
   }
-
-  openEditModal(index: number): void {
-    this.editIndex = index;
-    this.editedBook = { ...this.books[index] }; // Copy data
-    this.isEditModalOpen = true;
-  }
-
-  closeEditModal(): void {
-    this.isEditModalOpen = false;
-    this.editedBook = {} as Book;
-  }
-
-  cancelEdit() {
-    this.editingBook = null;
-  }
-
 }

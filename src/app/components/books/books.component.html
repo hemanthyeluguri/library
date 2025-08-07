@@ -4,56 +4,73 @@
   <h2>Book Management</h2>
   <p>Manage your library's book collection</p>
 
+  <div class="group1">
   <div class="d-flex justify-content-between mb-3">
-    <input type="text" class="form-control w-50 me-2" placeholder="Search books..." [(ngModel)]="searchTerm"
+    <input class="onCategoryChange" type="text" class="form-control w-50 me-2" placeholder="Search books..." [(ngModel)]="searchTerm"
       (input)="onSearchChange()" />
 
     <select class="form-select w-25" [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
       <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
     </select>
+
     <!-- Add Book Button -->
     <div class="col-md-2">
-      <a class="btn btn-outline-primary w-100" (click)="toggleAddForm(); scrollToTop()">
+      <a class="btn btn-outline-primary w-100" (click)="openAddModal(); scrollToTop()">
         <i class="bi bi-plus"></i> Add Book
       </a>
     </div>
 
-    <!-- Add Book Form -->
-    <div *ngIf="showAddForm" class="add-book-form mt-3" #top>
-      <div class="container">
-      <form (ngSubmit)="submitForm()" #bookForm="ngForm">
-        <div class="form-group">
-          <label>Title</label>
-          <input type="text" class="form-control" [(ngModel)]="newBook.title" name="title" required>
-        </div>
+    <!-- Add Book Modal -->
+    <div class="modal" *ngIf="isAddModalOpen">
+      <div class="modal-content">
+        <span class="close" (click)="closeAddModal()">&times;</span>
 
-        <div class="form-group">
-          <label>Author</label>
-          <input type="text" class="form-control" [(ngModel)]="newBook.author" name="author" required>
-        </div>
+        <div class="add-form">
+          <h4>Add New Book</h4>
+          <form (ngSubmit)="submitForm()" #bookForm="ngForm">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" id="title" [(ngModel)]="newBook.title" name="title" required />
+            </div>
 
-        <div class="form-group">
-          <label>Category</label>
-          <input type="text" class="form-control" [(ngModel)]="newBook.category" name="category" required>
-        </div>
+            <div class="form-group">
+              <label for="author">Author</label>
+              <input type="text" class="form-control" id="author" [(ngModel)]="newBook.author" name="author" required />
+            </div>
 
-        <div class="form-group">
-          <label>ISBN</label>
-          <input type="text" class="form-control" [(ngModel)]="newBook.isbn" name="isbn" required>
-        </div>
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select class="form-control" id="category" [(ngModel)]="newBook.category" name="category" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Non-fiction">Non-fiction</option>
+                <option value="Children">Children</option>
+                <option value="Academic">Academic</option>
+              </select>
+            </div>
 
-        <div class="form-group">
-          <label>Total Books</label>
-          <input type="number" class="form-control" [(ngModel)]="newBook.totalbooks" name="totalbooks" required>
-        </div>
+            <div class="form-group">
+              <label for="isbn">ISBN</label>
+              <input type="text" class="form-control" id="isbn" [(ngModel)]="newBook.isbn" name="isbn" required />
+            </div>
 
-        <button type="submit" class="btn btn-success mt-2">Submit</button>
-      </form>
+            <div class="form-group">
+              <label for="totalbooks">Total Books</label>
+              <input type="number" class="form-control" id="totalbooks" [(ngModel)]="newBook.totalbooks"
+                name="totalbooks" required />
+            </div>
+
+            <button type="submit" class="btn btn-outline-success mt-3 submit">
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
     </div>
 
-  </div>
 
+  </div>
+</div>
   <table class="table table-hover">
     <thead class="table-light">
       <tr>
@@ -88,7 +105,7 @@
           {{ book.available }}
         </td>
         <td>
-          <button id="edit" class="icon me-2 btn btn-link p-0" (click)="openEditModal(i)">
+          <button id="edit" class="icon me-2 btn btn-link p-0" (click)="openEditModal(book.id -1)">
             <span class="fas fa-edit me-2"></span>
           </button>
           <button class="icon btn btn-link p-0" (click)="deleteBook(book.id)">
@@ -109,7 +126,7 @@
     <span class="close" (click)="closeEditModal()">&times;</span>
 
     <div *ngIf="editedBook.title != null && editedBook.title !== ''; else noAccess" class="edit-form">
-      <h4>Tutorial</h4>
+      <h4>Edit Book</h4>
       <form (ngSubmit)="updateBook()" #editForm="ngForm">
         <div class="form-group">
           <label for="title">Title</label>
@@ -120,26 +137,30 @@
           <label for="author">Author</label>
           <input type="text" class="form-control" id="author" [(ngModel)]="editedBook.author" name="author" required />
         </div>
-        
+
         <div class="form-group">
           <label for="category">Category</label>
-          <input type="text" class="form-control" id="category" [(ngModel)]="editedBook.category" name="category" required />
+            <select class="form-select" [(ngModel)]="editedBook.category" name="category" required>
+            <option value="Fiction">Fiction</option>
+            <option value="Non-Fiction">Non-Fiction</option>
+            <option value="Children">Children</option>
+            <option value="Academic">Academic</option>
+          </select>
         </div>
 
         <div class="form-group">
           <label for="isbn">ISBN</label>
           <input type="text" class="form-control" id="isbn" [(ngModel)]="editedBook.isbn" name="isbn" required />
         </div>
-        <button type="submit" class="btn btn-outline-success mt-3">
+        <p class="pt-2">{{ message }}</p>
+        <button type="submit" class="btn btn-outline-success mt-2 submit">
           Update
         </button>
       </form>
-      <p>{{ message }}</p>
     </div>
 
     <ng-template #noAccess>
-      <p>Cannot access this Tutorial...</p>
+      <p>Cannot access this Edit Book...</p>
     </ng-template>
   </div>
 </div>
-
