@@ -129,7 +129,7 @@
     <span class="close" (click)="closeEditModal()">&times;</span>
 
     <div *ngIf="editedMember.pin_no != null && editedMember.pin_no !== ''; else noAccess" class="edit-form">
-      <h4>Tutorial</h4>
+      <h4>Edit member</h4>
       <form (ngSubmit)="updateMember()" #editForm="ngForm">
         <div class="form-group">
           <label for="name">Name</label>
@@ -173,7 +173,7 @@
     </div>
 
     <ng-template #noAccess>
-      <p>Cannot access this Tutorial...</p>
+      <p>Cannot access this Edit Member...</p>
     </ng-template>
   </div>
 </div>

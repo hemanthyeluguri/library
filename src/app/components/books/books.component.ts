@@ -13,7 +13,7 @@ export class BooksComponent implements OnInit {
   searchTerm = '';
   selectedCategory = 'All Categories';
   categories = ['All Categories', 'Fiction', 'Academic', 'Children', 'Non-Fiction'];
-   page: number = 1;
+  page: number = 1;
   isEditModalOpen = false;
   editIndex: number | null = null;
   isAddModalOpen: boolean = false;
@@ -126,10 +126,9 @@ export class BooksComponent implements OnInit {
   }
 
   // update book
-    openEditModal(index: number): void {
-    this.editIndex = index;
-    console.log(this.editIndex);
-    this.editedBook = { ...this.books[index] }; // Copy data
+  openEditModal(book: Book): void {
+    this.editedBook = { ...book };// Copy data
+    console.log(this.editedBook);
     this.isEditModalOpen = true;
   }
 
@@ -154,8 +153,8 @@ export class BooksComponent implements OnInit {
     this.isEditModalOpen = false;
     this.editedBook = {} as Book;
     this.loadBooks();
-    this.message=''
-   }
+    this.message = ''
+  }
 
   // delete book
   deleteBook(id: number): void {
