@@ -13,59 +13,74 @@
     </select>
 
     <div class="col-md-2">
-      <a class="btn btn-outline-primary w-100" (click)="toggleAddForm(); scrollToTop()">
+      <a class="btn btn-outline-primary w-100" (click)="openAddModal(); scrollToTop()">
         <i class="fas fa-user-plus"></i> Add Member
       </a>
     </div>
   </div>
 
-  <!-- Add Member Form -->
-  <div *ngIf="showAddForm" class="add-member-form mt-3" #top>
-    <div class="container">
-      <form (ngSubmit)="submitForm()" #memberForm="ngForm">
-        <div class="form-group">
-          <label>Admission ID</label>
-          <input type="number" class="form-control" [(ngModel)]="newMember.admission_id" name="admission_id" required>
-        </div>
+  <!-- Add Member Modal -->
+<div class="modal" *ngIf="isAddModalOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closeAddModal()">&times;</span>
 
-        <div class="form-group">
-          <label>PIN No</label>
-          <input type="text" class="form-control" [(ngModel)]="newMember.pin_no" name="pin_no" required>
-        </div>
+    <h4>Add New Member</h4>
+    <form (ngSubmit)="submitForm()" #memberForm="ngForm">
 
-        <div class="form-group">
-          <label>Name</label>
-          <input type="text" class="form-control" [(ngModel)]="newMember.name" name="name" required>
-        </div>
+      <div class="form-group">
+        <label>PIN No</label>
+        <input type="text" class="form-control" [(ngModel)]="newMember.pin_no" name="pin_no" required>
+      </div>
 
-        <div class="form-group">
-          <label>Degree</label>
-          <input type="text" class="form-control" [(ngModel)]="newMember.degree" name="degree" required>
-        </div>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" [(ngModel)]="newMember.name" name="name" required>
+      </div>
 
-        <div class="form-group">
-          <label>Branch</label>
-          <input type="text" class="form-control" [(ngModel)]="newMember.branch" name="branch" required>
-        </div>
+      <div class="form-group">
+        <label>Degree</label>
+        <input type="text" class="form-control" [(ngModel)]="newMember.degree" name="degree" required>
+      </div>
 
-        <div class="form-group">
-          <label>Year</label>
-          <input type="number" class="form-control" [(ngModel)]="newMember.year" name="year" required>
-        </div>
+      <div class="form-group">
+        <label>Branch</label>
+        <select class="form-select" [(ngModel)]="newMember.branch" name="branch" required>
+          <option value="" disabled selected>Select a Branch</option>
+          <option value="Civil">Civil</option>
+          <option value="Mech">Mech</option>
+          <option value="EEE">EEE</option>
+          <option value="ECE">ECE</option>
+          <option value="CSE">CSE</option>
+          <option value="CDS">CDS</option>
+          <option value="AIML">AIML</option>
+          <option value="CS">CS</option>
+        </select>
+      </div>
 
-        <div class="form-group">
-          <label>Status</label>
-          <select class="form-select" [(ngModel)]="newMember.status" name="status" required>
-            <option value="Active">Active</option>
-            <option value="Alumni">Alumni</option>
-            <option value="Suspended">Suspended</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label>Year</label>
+        <select class="form-select" [(ngModel)]="newMember.year" name="year" required>
+          <option value="1">1st year</option>
+          <option value="2">2nd year</option>
+          <option value="3">3rd year</option>
+          <option value="4">4th year</option>
+        </select>
+      </div>
 
-        <button type="submit" class="btn btn-success mt-2">Submit</button>
-      </form>
-    </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select class="form-select" [(ngModel)]="newMember.status" name="status" required>
+          <option value="Active">Active</option>
+          <option value="Alumni">Alumni</option>
+          <option value="Suspended">Suspended</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-success mt-3 submit">Submit</button>
+    </form>
   </div>
+</div>
+
 
   <!-- Member List Table -->
   <table class="table table-hover mt-4">
@@ -107,7 +122,7 @@
           </span>
         </td>
         <td>
-          <button id="edit" class="icon me-2 btn btn-link p-0" (click)="openEditModal(i)">
+          <button id="edit" class="icon me-2 btn btn-link p-0" (click)="openEditModal(member)">
             <span class="fas fa-edit me-2"></span>
           </button>
           <button class="icon btn btn-link p-0" (click)="deleteMember(member.admission_id)">
@@ -138,12 +153,22 @@
 
         <div class="form-group">
           <label for="degree">Degree</label>
-          <input type="text" class="form-control" id="degree" [(ngModel)]="editedMember.degree" name="degree" required />
+          <input type="text" class="form-control" id="degree" [(ngModel)]="editedMember.degree" name="degree"
+            required />
         </div>
 
         <div class="form-group">
           <label for="branch">Branch</label>
-          <input type="text" class="form-control" id="branch" [(ngModel)]="editedMember.branch" name="branch" />
+          <select class="form-select" [(ngModel)]="editedMember.branch" name="branch" required>
+            <option value="Civil">Civil</option>
+            <option value="Mech">Mech</option>
+            <option value="EEE">EEE</option>
+            <option value="ECE">ECE</option>
+            <option value="CSE">CSE</option>
+            <option value="CDS">CDS</option>
+            <option value="AIML">AIML</option>
+            <option value="CS">CS</option>
+          </select>
         </div>
 
         <div class="form-group">
@@ -164,12 +189,11 @@
             <option value="Suspended">Suspended</option>
           </select>
         </div>
-        
-        <button type="submit" class="btn btn-outline-success mt-3">
+        <p>{{ message }}</p>
+        <button type="submit" class="btn btn-outline-success mt-3 submit">
           Update
         </button>
       </form>
-      <p>{{ message }}</p>
     </div>
 
     <ng-template #noAccess>

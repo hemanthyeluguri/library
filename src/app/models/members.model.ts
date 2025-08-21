@@ -1,5 +1,3 @@
-import { Book } from "./book.model";
-
 export class Member {
   admission_id!: number;
   pin_no!: string;
