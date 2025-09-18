@@ -1,0 +1,139 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<div class="container mt-2">
+  <h2>Loan Management</h2>
+  <p>Manage book loans to members</p>
+
+  <div class="group1">
+    <div class="d-flex justify-content-between mb-3">
+      <input
+        type="text"
+        class="form-control w-50 me-2"
+        placeholder="Search loans by member or book..."
+        [(ngModel)]="searchTerm"
+        (input)="applyFilters()"
+      />
+
+      <select class="form-select w-25" [(ngModel)]="selectedStatus" (change)="applyFilters()">
+        <option value="All">All Status</option>
+        <option value="ISSUED">Issued</option>
+        <option value="OVERDUE">Overdue</option>
+        <option value="RETURNED">Returned</option>
+      </select>
+
+      <div class="col-md-2">
+        <button class="btn btn-outline-primary w-100" (click)="openAddModal(); scrollToTop()">
+          <i class="bi bi-plus"></i> Add Loan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Loan Modal -->
+  <div class="modal" *ngIf="isAddModalOpen">
+    <div class="modal-content">
+      <span class="close" (click)="closeAddModal()">&times;</span>
+
+      <div class="add-form">
+        <h4>Issue New Loan</h4>
+        <form (ngSubmit)="submitLoan()" #loanForm="ngForm">
+          <div class="form-group mb-2">
+            <label for="member">Select Member</label>
+            <select
+              id="member"
+              class="form-select"
+              required
+              [(ngModel)]="newLoan.pinNo"
+              name="pinNo"
+              (change)="onMemberChange()"
+            >
+              <option value="" disabled selected>Select a member</option>
+              <option *ngFor="let mem of members" [value]="mem.pin_no">
+                {{ mem.name }} ({{ mem.status }})
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="book">Select Book (Author - Title)</label>
+            <select
+              id="book"
+              class="form-select"
+              required
+              [(ngModel)]="newLoan.bookId"
+              name="bookId"
+              (change)="onBookChange()"
+            >
+              <option value="" disabled selected>Select a book</option>
+              <option
+                *ngFor="let book of availableBooks"
+                [value]="book.id"
+              >
+                {{ book.author }} - {{ book.title }} (Available: {{ book.available }})
+              </option>
+            </select>
+          </div>
+
+          <div *ngIf="!memberIsActive && newLoan.pinNo" class="alert alert-danger">
+            This member is not active and cannot borrow books.
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-outline-success mt-3 submit"
+           
+          >
+            Issue Loan
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loans Table -->
+  <table class="table table-hover mt-3">
+    <thead class="table-light">
+      <tr>
+        <th>Member Name</th>
+        <th>Book (Author - Title)</th>
+        <th>Issue Date</th>
+        <th>Due Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let loan of filteredLoans | paginate: { itemsPerPage: 8, currentPage: page }">
+        <td>{{ getMemberName(loan.pinNo) }}</td>
+        <td>{{ getBookDisplay(loan.bookId) }}</td>
+        <td>{{ loan.issueDate | date: 'mediumDate' }}</td>
+        <td>{{ loan.dueDate | date: 'mediumDate' }}</td>
+        <td>{{ loan.returnDate ? (loan.returnDate | date: 'mediumDate') : '-' }}</td>
+        <td>
+          <span [ngClass]="{
+            'text-success': loan.status === 'RETURNED',
+            'text-warning': loan.status === 'ISSUED',
+            'text-danger': loan.status === 'OVERDUE'
+          }">
+            {{ loan.status }}
+          </span>
+        </td>
+        <td>
+          <button
+            *ngIf="loan.status !== 'RETURNED'"
+            class="btn btn-outline-primary btn-sm"
+            (click)="returnLoan(loan)"
+          >
+            Return
+          </button>
+          <span *ngIf="loan.status === 'RETURNED'">-</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="ngx-pagination">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>

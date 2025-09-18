@@ -11,13 +11,11 @@ import { MembersService } from 'src/app/services/members.service';
 export class MembersComponent implements OnInit {
   members: Member[] = [];
   filteredMembers: Member[] = [];
-
   searchTerm = '';
   selectedBranch = 'All Branches';
-  branches = ['All Branches', 'CSE', 'ECE', 'EEE', 'MECH', 'CIVIL']; // Example branches
-
+  branches = ['All Branches', 'CSE', 'ECE', 'EEE', 'MECH', 'CIVIL', 'CDS', 'AIML', 'CS'];
   page: number = 1;
-  showAddForm = false;
+  isAddModalOpen: boolean = false;
   isEditModalOpen = false;
   editIndex: number | null = null;
 
@@ -47,8 +45,7 @@ export class MembersComponent implements OnInit {
   message = '';
 
   constructor(
-    private memberService: MembersService,
-    private cdr: ChangeDetectorRef
+    private memberService: MembersService
   ) { }
 
   ngOnInit(): void {
@@ -61,22 +58,7 @@ export class MembersComponent implements OnInit {
       this.applyFilters();
     });
   }
-  updateMember(): void {
-    this.message = '';
 
-    this.memberService
-      .update(this.editedMember.admission_id, this.editedMember)
-      .subscribe({
-
-        next: (res) => {
-          console.log(res);
-          this.message = res.message
-            ? res.message
-            : 'This data was updated successfully!';
-        },
-        error: (e) => console.error(e)
-      });
-  }
   onSearchChange(): void {
     this.applyFilters();
   }
@@ -94,18 +76,21 @@ export class MembersComponent implements OnInit {
   applyFilters(): void {
     const term = this.searchTerm.toLowerCase();
     this.filteredMembers = this.members.filter(member =>
+      member.name.toLowerCase().includes(term) ||
+      member.pin_no.toLowerCase().includes(term) ||
       member.branch.toLowerCase().includes(term)
     );
-  }
-
-  toggleAddForm() {
-    this.showAddForm = !this.showAddForm;
   }
 
   scrollToTop() {
     setTimeout(() => {
       this.topElement?.nativeElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
+  }
+
+  //add member
+  openAddModal() {
+    this.isAddModalOpen = true;
   }
 
   submitForm() {
@@ -121,16 +106,63 @@ export class MembersComponent implements OnInit {
           year: 1,
           status: 'Active',
         };
-        this.showAddForm = false;
-        this.loadMembers(); // reload
+        this.loadMembers();
       },
       error: (err) => {
         console.error(err);
         alert('Failed to add member');
       }
     });
+    console.log('Adding new member:', this.newMember);
+    this.closeAddModal();
   }
 
+  closeAddModal() {
+    this.isAddModalOpen = false;
+    this.newMember = {
+      admission_id: 0,
+      pin_no: '',
+      name: '',
+      degree: '',
+      branch: '',
+      year: 0,
+      status: 'Active'
+    };;
+  }
+
+  //update member
+  openEditModal(member: Member): void {
+    this.editedMember = { ...member }
+    this.isEditModalOpen = true;
+    console.log('Editing member:', this.editedMember);
+
+  }
+
+  updateMember(): void {
+    this.message = '';
+
+    this.memberService
+      .update(this.editedMember.admission_id, this.editedMember)
+      .subscribe({
+
+        next: (res) => {
+          console.log(res);
+          this.message = res.message
+            ? res.message
+            : 'This data was updated successfully!';
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  closeEditModal(): void {
+    this.isEditModalOpen = false;
+    this.editedMember = { ...this.newMember };
+    this.loadMembers();
+  }
+
+
+  //delete member
   deleteMember(id: number): void {
     if (confirm('Are you sure you want to delete this member?')) {
       this.memberService.deleteMember(id).subscribe(() => {
@@ -140,19 +172,6 @@ export class MembersComponent implements OnInit {
         this.applyFilters();
       });
     }
-  }
-
-  openEditModal(index: number): void {
-    this.editIndex = index;
-    this.editedMember = { ...this.members[index] };
-    this.isEditModalOpen = true;
-    console.log('Editing member:', this.editedMember);
-
-  }
-
-  closeEditModal(): void {
-    this.isEditModalOpen = false;
-    this.editedMember = { ...this.newMember };
   }
 
 }
